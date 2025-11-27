@@ -43,9 +43,11 @@ def user_input_features():
 df = user_input_features()
 
 datos = pd.read_csv("Fitness_Classification.csv", encoding="latin-1")
+datos.columns = datos.columns.str.strip() #aquí tuve que pedirle a gemini que me ayudara con los datos vacíos
+datos = datos.apply(pd.to_numeric, errors="ignore")
 
-datos["smokes"] = datos["smokes"].replace({"yes": 1, "no": 0})
-datos["gender"] = datos["gender"].replace({"M": 1, "F": 0})
+datos["smokes"] = datos["smokes"].replace({"yes":1, "no":0})
+datos["gender"] = datos["gender"].replace({"M":1, "F":0})
 
 X = datos.drop(columns=["is_fit"])
 y = datos["is_fit"]
@@ -65,7 +67,7 @@ b0 = LR.intercept_[0]
 
 prediccion = (
     b0
-    + b1[0] * df["age"]
+    + b1[0] * df["age"] #aquí tuve que separarlos así por que sino streamlit no lo agarra
     + b1[1] * df["height_cm"]
     + b1[2] * df["weight_kg"]
     + b1[3] * df["heart_rate"]
