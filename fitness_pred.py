@@ -3,8 +3,8 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 
-st.write("# Predicción: ¿Está en forma?")
-st.image("fitness.jpg", caption="Predice si una persona está en forma.")
+st.write("# Predicción: ¿Estás en forma?")
+st.image("fitness.jpg", caption="Predice si estás en forma.")
 
 st.header("Datos del usuario")
 # ----------------------------------------------------
