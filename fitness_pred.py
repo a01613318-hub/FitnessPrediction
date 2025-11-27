@@ -9,14 +9,14 @@ st.header('Datos del usuario')
 
 def user_input_features():
 
-    age = st.number_input("edad:", min_value=10, max_value=100, value=0)
-    height_cm = st.number_input("altura_cm:", min_value=100, max_value=220, value=0)
-    weight_kg = st.number_input("peso_kg:", min_value=30, max_value=200, value=0)
-    heart_rate = st.number_input("frecuencia_cardiaca:", min_value=40, max_value=200, value=0)
-    blood_pressure = st.number_input("presión_arterial:", min_value=80, max_value=200, value=0)
-    sleep_hours = st.number_input("horas_sueño:", min_value=0.0, max_value=15.0, value=0.0)
-    nutrition_quality = st.number_input("calidad_nutricional:", min_value=0.0, max_value=10.0, value=0.0)
-    activity_index = st.number_input("índice_actividad:", min_value=1.0, max_value=5.0, value=1.0)
+    age = st.number_input("edad:", min_value=10, max_value=100, value=1) #tuve qiue añadir 1+ a l valor mínimo por que streamlit  me marcaba error
+    height_cm = st.number_input("altura_cm:", min_value=100, max_value=220, value=101)
+    weight_kg = st.number_input("peso_kg:", min_value=30, max_value=200, value=31)
+    heart_rate = st.number_input("frecuencia_cardiaca:", min_value=40, max_value=200, value=41)
+    blood_pressure = st.number_input("presión_arterial:", min_value=80, max_value=200, value=81)
+    sleep_hours = st.number_input("horas_sueño:", min_value=0.0, max_value=15.0, value=0.1)
+    nutrition_quality = st.number_input("calidad_nutricional:", min_value=0.0, max_value=10.0, value=0.1)
+    activity_index = st.number_input("índice_actividad:", min_value=1.0, max_value=5.0, value=1.1)
 
     smokes = st.selectbox("fuma:", ["no", "sí"])
     smokes = 1 if smokes == "sí" else 0
