@@ -6,28 +6,52 @@ from sklearn.linear_model import LogisticRegression
 st.write("# Predicción: ¿Está en forma?")
 st.image("fitness.jpg", caption="Predice si una persona está en forma.")
 
-st.header("Datos del usuario"))
-
+st.header("Datos del usuario")
+# ----------------------------------------------------
+# 1. IMPORTAR DATOS
+# ----------------------------------------------------
 df = pd.read_csv("Fitness_Classification.csv")
+
+# Revisamos nombres de columnas
+# st.write(df.columns)
+
+# ----------------------------------------------------
+# 2. LIMPIEZA Y CONVERSIÓN DE VARIABLES
+# ----------------------------------------------------
+
+# Asegurar que smokes está estandarizado
 df["smokes"] = df["smokes"].replace({"no": 0, "yes": 1, "0": 0, "1": 1})
 
+# Asegurar que gender está estandarizado
 df["gender"] = df["gender"].replace({"F": 0, "M": 1})
 
+# Convertir sleep_hours a numérico y rellenar NA
 df["sleep_hours"] = pd.to_numeric(df["sleep_hours"], errors="coerce")
 df["sleep_hours"] = df["sleep_hours"].fillna(df["sleep_hours"].mean())
 
-
+# ----------------------------------------------------
+# 3. DEFINIR FEATURES Y TARGET
+# ----------------------------------------------------
 X = df.drop(["is_fit"], axis=1)
 y = df["is_fit"]
 
+# Verificar que no existan NaN ni strings
+# st.write(X.isna().sum())
 
+# ----------------------------------------------------
+# 4. ENTRENAR MODELO
+# ----------------------------------------------------
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 LR = LogisticRegression(max_iter=1000)
 LR.fit(X_train, y_train)
 
-
+# ----------------------------------------------------
+# 5. FUNCIÓN PARA CAPTURAR INPUT DEL USUARIO
+# ----------------------------------------------------
 def user_input_features():
+
+    # NOTA: siempre dar un "value" dentro del rango permitido.
     age = st.number_input("Edad:", min_value=10, max_value=100, value=25)
 
     height_cm = st.number_input("Altura (cm):", min_value=120, max_value=220, value=170)
@@ -62,9 +86,14 @@ def user_input_features():
 
     return datos_usuario
 
-
+# ----------------------------------------------------
+# 6. OBTENER DATOS DEL USUARIO
+# ----------------------------------------------------
 datos = user_input_features()
 
+# ----------------------------------------------------
+# 7. PREDECIR
+# ----------------------------------------------------
 prediccion = LR.predict(datos)
 prob = LR.predict_proba(datos)[0][1]
 
