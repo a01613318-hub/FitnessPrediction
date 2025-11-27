@@ -2,14 +2,14 @@ import numpy as np
 import streamlit as st
 import pandas as pd
 
-st.write(''' # Predicción: ¿Está en forma? ''')
+st.write(''' # Predicción: ¿Estás en forma? ''')
 st.image("fitness.jpg", caption="Predice si una persona está en forma.")
 
 st.header('Datos del usuario')
 
 def user_input_features():
 
-    age = st.number_input("edad:", min_value=10, max_value=100, value=1) #tuve qiue añadir 1+ a l valor mínimo por que streamlit  me marcaba error
+    age = st.number_input("edad:", min_value=10, max_value=100, value=11) #tuve qiue añadir 1+ a l valor mínimo por que streamlit  me marcaba error
     height_cm = st.number_input("altura_cm:", min_value=100, max_value=220, value=101)
     weight_kg = st.number_input("peso_kg:", min_value=30, max_value=200, value=31)
     heart_rate = st.number_input("frecuencia_cardiaca:", min_value=40, max_value=200, value=41)
